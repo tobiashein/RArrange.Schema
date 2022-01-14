@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/rarrange.schema.json",
+  "type": "object",
+  "properties": {
+    "catchAllRegion": {
+      "type": "boolean"
+    },
+    "endOfLineType": {
+      "$ref": "#/$defs/endOfLineType"
+    },
+    "headerRegion": {
+      "type": "boolean"
+    },
+    "tabs": {
+      "type": "boolean"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/group"
+      }
+    }
+  },
+  "$defs": {
+    "group": {
+      "type": "object",
+      "properties": {
+        "regionName": {
+          "type": "string"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "sorters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sorter"
+          }
+        }
+      }
+    },
+    "sorter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/sorterType"
+        },
+        "accessModifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/accessModifier"
+          }
+        },
+        "modifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/modifier"
+          }
+        },
+        "sortOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sortOrder"
+          }
+        }
+      }
+    },
+    "sorterType": {
+      "type": "string",
+      "enum": [
+        "class",
+        "constructor",
+        "conversionOperator",
+        "delegate",
+        "destructor",
+        "enum",
+        "event",
+        "eventField",
+        "field",
+        "indexer",
+        "interface",
+        "method",
+        "nestedType",
+        "operator",
+        "property",
+        "struct",
+        "type"
+      ]
+    },
+    "accessModifier": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "protected",
+        "private",
+        "protectedInternal",
+        "privateProtected",
+        "explicitInterfaceImplementation"
+      ]
+    },
+    "modifier": {
+      "type": "string",
+      "enum": [
+        "abstract",
+        "async",
+        "const",
+        "event",
+        "extern",
+        "new",
+        "override",
+        "partial",
+        "readonly",
+        "sealed",
+        "static",
+        "unsafe",
+        "virtual",
+        "volatile"
+      ]
+    },
+    "sortOrder": {
+      "type": "string",
+      "enum": [
+        "nameAscending",
+        "nameDescending",
+        "parameterCountAscending",
+        "parameterCountDescending",
+        "accessModifierAscending",
+        "accessModifierDescending"
+      ]
+    },
+    "endOfLineType": {
+      "type": "string",
+      "enum": [
+        "default",
+        "crlf",
+        "cr",
+        "lf"
+      ]
+    }
+  }
+}
