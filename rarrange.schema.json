@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/rarrange.schema.json",
+  "$id": "https://raw.githubusercontent.com/tobiashein/rarrange.schema/develop/rarrange.schema.json",
   "type": "object",
   "properties": {
     "catchAllRegion": {
@@ -22,6 +22,9 @@
       }
     }
   },
+  "required": [
+    "groups"
+  ],
   "$defs": {
     "group": {
       "type": "object",
@@ -33,15 +36,29 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/group"
-          }
+          },
+          "minItems": 1
         },
         "sorters": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/sorter"
-          }
+          },
+          "minItems": 1
         }
-      }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "groups"
+          ]
+        },
+        {
+          "required": [
+            "sorters"
+          ]
+        }
+      ]
     },
     "sorter": {
       "type": "object",
@@ -67,7 +84,10 @@
             "$ref": "#/$defs/sortOrder"
           }
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "sorterType": {
       "type": "string",
