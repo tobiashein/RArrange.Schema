@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/tobiashein/rarrange.schema/develop/rarrange.schema.json",
+  "type": "object",
+  "properties": {
+    "catchall-region-name": {
+      "type": "string"
+    },
+    "endofline-type": {
+      "$ref": "#/$defs/endofline-type"
+    },
+    "header-region-name": {
+      "type": "string"
+    },
+    "use-tabs": {
+      "type": "boolean"
+    },
+    "use-endregion-names": {
+      "type": "boolean"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/group"
+      }
+    }
+  },
+  "required": [
+    "groups"
+  ],
+  "$defs": {
+    "group": {
+      "type": "object",
+      "properties": {
+        "region-name": {
+          "type": "string"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/group"
+          },
+          "minItems": 1
+        },
+        "sorters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sorter"
+          },
+          "minItems": 1
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "groups"
+          ]
+        },
+        {
+          "required": [
+            "sorters"
+          ]
+        }
+      ]
+    },
+    "sorter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/sorterType"
+        },
+        "access-modifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/access-modifier"
+          }
+        },
+        "modifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/modifier"
+          }
+        },
+        "sort-order": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sort-order"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "sorter-type": {
+      "type": "string",
+      "enum": [
+        "class",
+        "constructor",
+        "conversionOperator",
+        "delegate",
+        "destructor",
+        "enum",
+        "event",
+        "eventField",
+        "field",
+        "indexer",
+        "interface",
+        "method",
+        "nestedType",
+        "operator",
+        "property",
+        "struct",
+        "type"
+      ]
+    },
+    "access-modifier": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "protected",
+        "private",
+        "protectedInternal",
+        "privateProtected",
+        "explicitInterfaceImplementation"
+      ]
+    },
+    "modifier": {
+      "type": "string",
+      "enum": [
+        "abstract",
+        "async",
+        "const",
+        "event",
+        "extern",
+        "new",
+        "override",
+        "partial",
+        "readonly",
+        "sealed",
+        "static",
+        "unsafe",
+        "virtual",
+        "volatile"
+      ]
+    },
+    "sort-order": {
+      "type": "string",
+      "enum": [
+        "nameAscending",
+        "nameDescending",
+        "parameterCountAscending",
+        "parameterCountDescending",
+        "accessModifierAscending",
+        "accessModifierDescending"
+      ]
+    },
+    "endofline-type": {
+      "type": "string",
+      "enum": [
+        "default",
+        "crlf",
+        "cr",
+        "lf"
+      ]
+    }
+  }
+}
